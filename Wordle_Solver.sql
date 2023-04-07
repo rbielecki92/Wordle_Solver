@@ -25,22 +25,22 @@ DECLARE
 	---------------------------------------------<< PLAY >>---------------------------------------------------------
 	--GREEN
 	 @a AS CHAR	= NULL
-	,@b AS CHAR	= NULL
+	,@b AS CHAR	= 'a'
 	,@c AS CHAR	= NULL
-	,@d AS CHAR	= NULL
-	,@e AS CHAR	= NULL
+	,@d AS CHAR	= 'o'
+	,@e AS CHAR	= 'r'
 	--YELLOW
 	,@yellow_a AS VARCHAR(100) = NULL	,@yellow_a2 AS VARCHAR(100) = NULL	,@yellow_a3 AS VARCHAR(100) = NULL
-	,@yellow_b AS VARCHAR(100) = NULL	,@yellow_b2 AS VARCHAR(100) = NULL	,@yellow_b3 AS VARCHAR(100) = NULL
-	,@yellow_c AS VARCHAR(100) = NULL	,@yellow_c2 AS VARCHAR(100) = NULL	,@yellow_c3 AS VARCHAR(100) = NULL
-	,@yellow_d AS VARCHAR(100) = NULL	,@yellow_d2 AS VARCHAR(100) = NULL	,@yellow_d3 AS VARCHAR(100) = NULL
+	,@yellow_b AS VARCHAR(100) = 'r'	,@yellow_b2 AS VARCHAR(100) = NULL	,@yellow_b3 AS VARCHAR(100) = 'o'
+	,@yellow_c AS VARCHAR(100) = 'a'	,@yellow_c2 AS VARCHAR(100) = 'o'	,@yellow_c3 AS VARCHAR(100) = 'r'
+	,@yellow_d AS VARCHAR(100) = NULL	,@yellow_d2 AS VARCHAR(100) = NULL	,@yellow_d3 AS VARCHAR(100) = 'a'
 	,@yellow_e AS VARCHAR(100) = NULL	,@yellow_e2 AS VARCHAR(100) = NULL	,@yellow_e3 AS VARCHAR(100) = NULL
 	--GREY 
-	,@grey_letters AS VARCHAR(100) = ''
+	,@grey_letters AS VARCHAR(100) = 'c,n,e,p,i,u,s,b,x,r,z'
 	--FINAL WORD
 	,@today_word VARCHAR(10) = ''
 	--SHOW HISTORY (Y/N)
-	,@show_hist INT = 1
+	,@show_hist INT = 0
 	----------------------------------------------------------------------------------------------------------------
 	--Other
 	,@max_date_hist DATE
