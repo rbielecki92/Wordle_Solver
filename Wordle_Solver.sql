@@ -14,13 +14,9 @@ Created by Rafal Bielecki 2023-04-03
 /*
 
 TO DO:
-- indexes
 - better probablility?
-- scripts to insert data
 - '' instead of NULL
 - @grey_letters without commas
-- add _tb_ before tables
-- add to github
 
 
 */
