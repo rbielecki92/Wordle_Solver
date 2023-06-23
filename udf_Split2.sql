@@ -3,7 +3,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-ALTER FUNCTION [dbo].[udf_Split2]
+CREATE OR ALTER FUNCTION [dbo].[udf_Split2]
 
 (   
 -- List of delimited items 
