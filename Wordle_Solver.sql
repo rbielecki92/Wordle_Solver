@@ -17,30 +17,33 @@ TO DO:
 - better probablility?
 - '' instead of NULL
 - @grey_letters without commas
-
+- log reg to calculate probability?
+- add english definition
 
 */
+
+USE AdventureWorks2019;
 
 DECLARE 
 	---------------------------------------------<< PLAY >>---------------------------------------------------------
 	--GREEN
 	 @a AS CHAR	= NULL
-	,@b AS CHAR	= 'a'
+	,@b AS CHAR	= NULL
 	,@c AS CHAR	= NULL
-	,@d AS CHAR	= 'o'
-	,@e AS CHAR	= 'r'
+	,@d AS CHAR	= NULL
+	,@e AS CHAR	= NULL
 	--YELLOW
 	,@yellow_a AS VARCHAR(100) = NULL	,@yellow_a2 AS VARCHAR(100) = NULL	,@yellow_a3 AS VARCHAR(100) = NULL
-	,@yellow_b AS VARCHAR(100) = 'r'	,@yellow_b2 AS VARCHAR(100) = NULL	,@yellow_b3 AS VARCHAR(100) = 'o'
-	,@yellow_c AS VARCHAR(100) = 'a'	,@yellow_c2 AS VARCHAR(100) = 'o'	,@yellow_c3 AS VARCHAR(100) = 'r'
-	,@yellow_d AS VARCHAR(100) = NULL	,@yellow_d2 AS VARCHAR(100) = NULL	,@yellow_d3 AS VARCHAR(100) = 'a'
+	,@yellow_b AS VARCHAR(100) = NULL	,@yellow_b2 AS VARCHAR(100) = NULL	,@yellow_b3 AS VARCHAR(100) = NULL
+	,@yellow_c AS VARCHAR(100) = NULL	,@yellow_c2 AS VARCHAR(100) = NULL	,@yellow_c3 AS VARCHAR(100) = NULL
+	,@yellow_d AS VARCHAR(100) = NULL	,@yellow_d2 AS VARCHAR(100) = NULL	,@yellow_d3 AS VARCHAR(100) = NULL
 	,@yellow_e AS VARCHAR(100) = NULL	,@yellow_e2 AS VARCHAR(100) = NULL	,@yellow_e3 AS VARCHAR(100) = NULL
 	--GREY 
-	,@grey_letters AS VARCHAR(100) = 'c,n,e,p,i,u,s,b,x,r,z'
+	,@grey_letters AS VARCHAR(100) = 'c,r,a,n,e,p,i,o,u,s'
 	--FINAL WORD
 	,@today_word VARCHAR(10) = ''
 	--SHOW HISTORY (Y/N)
-	,@show_hist INT = 0
+	,@show_hist INT = 1
 	----------------------------------------------------------------------------------------------------------------
 	--Other
 	,@max_date_hist DATE
@@ -70,6 +73,7 @@ SELECT
 	END AS probability
 	,wbh.past_word
 	,wbh.date_word
+	,t.translate_word
 INTO
 	#wordle
 FROM 
@@ -77,6 +81,9 @@ FROM
 LEFT JOIN --words used in the past
 	_tb_wordle_base_hist wbh 
 		ON wb.final_word = wbh.past_word
+LEFT JOIN 
+	_tb_wordle_translate t
+		ON wb.final_word = t.word
 WHERE
 	--matching letters with correct place (green)
 		(wb.a = @a OR @a IS NULL)
@@ -137,6 +144,7 @@ SELECT
 	END AS probability
 	,past_word
 	,date_word 
+	,translate_word
 FROM 
 	#wordle
 ORDER BY 
@@ -175,3 +183,9 @@ IF @show_hist = 1
 		SELECT * FROM _tb_wordle_base_hist ORDER BY date_word DESC
 	END
 
+
+--weekend words
+--BEGIN TRAN
+--INSERT INTO _tb_wordle_base_hist SELECT UPPER('unzip'),CAST(GETDATE()-1 AS DATE) --Sunday
+--INSERT INTO _tb_wordle_base_hist SELECT UPPER('broke'),CAST(GETDATE()-2 AS DATE) --Saturday
+--COMMIT
