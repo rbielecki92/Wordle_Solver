@@ -162,7 +162,7 @@ WITH CTE AS
 SELECT 
 	ID
 	,past_word
-	,ROW_NUMBER() OVER(ORDER BY ID DESC) as rn 
+	,ROW_NUMBER() OVER(ORDER BY ID ASC) as rn 
 FROM dbo._tb_wordle_base_hist
 )
 
